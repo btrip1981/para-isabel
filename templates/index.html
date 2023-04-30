@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Home Page</title>
+    <style>
+    body {
+         background-image:url("https://i.ibb.co/Gk2mmQ5/ai-generated-ga728b6997-1920.jpg");
+         background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 100vh;
+           }
+
+        .container {
+        position: relative;
+        display: flex;
+        max-height: 50vh;
+        width:60%;
+        margin: auto;
+        height:30vh;
+        justify-content: center;
+        background-image: linear-gradient(to right, rgba(34,130,238,1), rgba(34,130,238,0));
+               }
+           h1 {
+           color: white;
+           text-align: center;
+           font-size: 30px;
+           text-shadow: 2px 2px 4px #000000;
+
+
+        }
+          .pass {
+          color: white;
+          text-shadow: 1px 1px 1px #000000;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-image: linear-gradient(to right, rgba(219,252,38,0.6), rgba(34,130,138,0));
+          padding: 20px;
+          border-radius: 10px;
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Madre Bonita</h1>
+
+<div class="pass">     <form id="passwordForm">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <button type="submit">Submit</button>
+    </form></div>
+ </div>
+><script>
+    document.getElementById('passwordForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const password = document.getElementById('password').value;
+        console.log('Password:', password);
+
+        fetch('/submit_password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({password: password})
+        })
+        .then(response => response.json().then(data => ({status: response.status, body: data})))
+        .then(result => {
+            if (result.status === 200) {
+            alert('Milf status confirmed. You are being re-directed to a hidden page.');
+                window.location.href = "/hidden";
+            } else if (result.status === 401 && result.body.result === 'incorrect_password') {
+                alert('Incorrect password. Please try again.');
+            } else {
+                console.error('Error:', result);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+</script>
+</body>
+</html>
