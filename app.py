@@ -47,7 +47,7 @@ def chat():
 @retry(stop=stop_after_attempt(max_attempts), wait=wait_fixed(wait_seconds))
 def call_gpt4_api(messages):
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4",
         messages=messages
     )
     return response['choices'][0]['message']['content'].strip()
